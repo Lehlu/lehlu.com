@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lehlu Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Stint Ultra Expanded', serif;
+      color: #fff;
+      scroll-behavior: smooth;
+      overflow: hidden;
+    }
+    .wrapper {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6vh 0;
+    }
+    .poster {
+      width: clamp(260px, 65vw, 560px);
+      max-height: 80vh;
+      aspect-ratio: 3 / 4;
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(1px);
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8vh 6vw;
+      box-sizing: border-box;
+    }
+    :root {
+      --fs-h1: clamp(1.4rem, 6vw + 0.5rem, 2.6rem);
+      --fs-h2: clamp(1.2rem, 5vw, 1.9rem);
+      --fs-p: clamp(0.85rem, 3.5vw, 1.05rem);
+    }
+    .poster h1 { font-size: var(--fs-h1); margin: 0.5em 0; }
+    .poster h2 { font-size: var(--fs-h2); margin: 0.5em 0; }
+    .poster p  { font-size: var(--fs-p); line-height: 1.45; margin: 0.5em 0; max-width: 90%; }
+    .poster a {
+      text-decoration: none;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 0.6em 1.4em;
+      margin-top: 1.2em;
+      transition: background 0.3s, color 0.3s;
+      font-size: calc(var(--fs-p) + 0.1rem);
+    }
+    .poster a:hover { background: #fff; color: #000; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <section class="section">
+      <div class="poster">
+        <h1>Lehlu Studio</h1>
+        <p>Cinematic Erotica Redefined — Los Angeles</p>
+        <a href="#">Start the Conversation</a>
+      </div>
+    </section>
+    <section class="section">
+      <div class="poster">
+        <h2>Manifesto</h2>
+        <p>We create elegant, minimal, and sensual films. Sexuality as art, elegance, emotional depth.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="poster">
+        <h2>Behind the Craft</h2>
+        <p>Sony FX3 · Zeiss glass · macro lenses · cinematic light. Intentional erotic art.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="poster">
+        <h2>Visual Style</h2>
+        <p>Sensuality, silhouettes, shadows. Fashion and art‑house influences.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="poster">
+        <h2>Work With Us</h2>
+        <p>No casting. Paid shoot or 50/50 partnership. Serious creators only.</p>
+        <a href="mailto:hello@lehlu.studio">Email Us</a>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
