@@ -6,10 +6,14 @@
   <title>LEHLU Gaming - AR Experience</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Фоновая картинка */
+    /* ФОН ЧЕРЕЗ BODY */
     body {
       margin: 0; padding: 0;
-      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
+      background-color: #000;
+      background-image: url('lehlu_cave_background_clean_final.jpg');
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
       color: #fff;
@@ -86,26 +90,21 @@
       background: rgba(0,0,0,0.8); border: 1px solid #ffd700;
       color: #ffd700; width: 44px; height: 44px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; outline: none;
+      font-size: 1.2rem;
     }
   </style>
 </head>
 <body>
-  
   <div class="bg-dimmer"></div>
 
-  <audio id="bg-audio" loop preload="auto">
-    <source src="ambient.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="click-sound" preload="auto">
-    <source src="click.mp3" type="audio/mpeg">
-  </audio>
+  <audio id="bg-audio" loop preload="auto"><source src="ambient.mp3" type="audio/mpeg"></audio>
+  <audio id="click-sound" preload="auto"><source src="click.mp3" type="audio/mpeg"></audio>
   
   <button id="mute-btn">🔇</button>
 
   <div class="wrapper" id="main-wrapper">
     
-    <section class="section" id="hero">
+    <section class="section" id="start">
       <div class="poster">
         <div class="scan-glow"></div>
         <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
@@ -129,6 +128,39 @@
       </div>
     </section>
 
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Behind the Play</h2>
+          <p>Team-focused runs & tactical extraction.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Visuals</h2>
+          <p>🎮 Minimal UI • 🩸 Dark Vibes</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Join & Win</h2>
+          <p>🎁 Weekly <span class="highlight">Rare Giveaways</span>.</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="links">
       <div class="poster">
         <div class="scan-glow"></div>
@@ -136,11 +168,12 @@
         <div class="content-box">
           <h2>Connect</h2>
           <div class="links-grid">
-            <a href="https://twitch.tv/lehlu" class="social-link sfx-trigger" target="_blank">🎮 <span>Twitch</span></a>
-            <a href="https://youtube.com/@lehlu" class="social-link sfx-trigger" target="_blank">📺 <span>YouTube</span></a>
-            <a href="https://discord.gg/lehlu" class="social-link sfx-trigger" target="_blank">💬 <span>Discord</span></a>
+            <a href="https://twitch.tv/lehlu" class="social-link sfx-trigger" target="_blank">🎮 <span>Twitch Live</span></a>
+            <a href="https://youtube.com/@lehlu" class="social-link sfx-trigger" target="_blank">📺 <span>YouTube HQ</span></a>
+            <a href="https://tiktok.com/@lehlu" class="social-link sfx-trigger" target="_blank">📱 <span>TikTok Clips</span></a>
+            <a href="https://discord.gg/lehlu" class="social-link sfx-trigger" target="_blank">💬 <span>Discord Squad</span></a>
           </div>
-          <a href="mailto:contact@lehlu.com" class="btn sfx-trigger">Contact</a>
+          <a href="mailto:contact@lehlu.com" class="btn sfx-trigger">Contact Us</a>
         </div>
       </div>
     </section>
@@ -153,25 +186,25 @@
     const muteBtn = document.getElementById('mute-btn');
     const wrapper = document.getElementById('main-wrapper');
 
-    // ПРИНУДИТЕЛЬНЫЙ СКРОЛЛ ВВЕРХ
-    window.scrollTo(0, 0);
-    wrapper.scrollTo(0, 0);
+    // ЖЕСТКИЙ СБРОС НА СТАРТ ПРИ ЗАГРУЗКЕ
+    window.addEventListener('load', () => {
+      // Очищаем хэш в адресе (#links) и мотаем вверх
+      if (window.location.hash) {
+        history.replaceState("", document.title, window.location.pathname + window.location.search);
+      }
+      wrapper.scrollTo(0, 0);
+    });
 
-    // ФУНКЦИЯ ЗАПУСКА ЗВУКА
     function startExperience() {
       if (bgAudio.paused) {
-        bgAudio.volume = 0.4;
-        bgAudio.play().then(() => {
-          muteBtn.innerText = '🔊';
-        }).catch(err => console.log("Audio play blocked"));
+        bgAudio.volume = 0.3;
+        bgAudio.play().then(() => muteBtn.innerText = '🔊').catch(() => {});
       }
     }
 
-    // Слушаем любой клик или касание для старта звука
     document.body.addEventListener('click', startExperience, { once: false });
     document.body.addEventListener('touchstart', startExperience, { once: false });
 
-    // Звук клика для кнопок
     document.querySelectorAll('.sfx-trigger').forEach(el => {
       el.addEventListener('click', () => {
         clickSound.currentTime = 0;
@@ -179,19 +212,12 @@
       });
     });
 
-    // Кнопка Mute
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (bgAudio.muted) {
-        bgAudio.muted = false;
-        muteBtn.innerText = '🔊';
-      } else {
-        bgAudio.muted = true;
-        muteBtn.innerText = '🔇';
-      }
+      bgAudio.muted = !bgAudio.muted;
+      muteBtn.innerText = bgAudio.muted ? '🔇' : '🔊';
     });
 
-    // Анимация появления
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
