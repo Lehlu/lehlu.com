@@ -6,7 +6,6 @@
   <title>LEHLU Gaming - AR Experience</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* ФОН ЧЕРЕЗ BODY */
     body {
       margin: 0; padding: 0;
       background-color: #000;
@@ -37,7 +36,7 @@
     }
 
     .poster {
-      position: relative; width: 90%; max-width: 500px; min-height: 70vh;
+      position: relative; width: 92%; max-width: 520px; min-height: 72vh;
       background: rgba(0, 0, 0, 0.93); backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 215, 0, 0.5);
       display: flex; flex-direction: column; overflow: hidden;
@@ -50,17 +49,35 @@
 
     .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid #ffd700; flex-shrink: 0; }
 
-    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px 20px; }
+    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 35px 25px; }
 
-    h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2.1rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
-    p { font-size: clamp(0.85rem, 4vw, 1rem); line-height: 1.6; margin: 8px 0; }
+    /* УВЕЛИЧЕННЫЕ ЗАГОЛОВКИ */
+    h1, h2 { 
+      font-size: clamp(1.5rem, 7vw, 2.6rem); 
+      margin: 12px 0; 
+      color: #ffd700; 
+      text-transform: uppercase; 
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); 
+      letter-spacing: 1px;
+    }
+
+    /* УВЕЛИЧЕННЫЙ ОСНОВНОЙ ТЕКСТ */
+    p { 
+      font-size: clamp(1rem, 4.5vw, 1.25rem); 
+      line-height: 1.6; 
+      margin: 10px 0; 
+      font-weight: 300;
+    }
     
+    .highlight { color: #ffd700; font-weight: bold; }
+
     .btn {
       text-decoration: none; color: #ffd700; border: 2px solid #ffd700;
-      padding: 12px 35px; margin-top: 20px; font-weight: bold;
+      padding: 14px 40px; margin-top: 25px; font-weight: bold;
       text-transform: uppercase; background: rgba(0,0,0,0.5);
       animation: glow-pulse 2s infinite ease-in-out;
       cursor: pointer;
+      font-size: 1.1rem;
     }
 
     @keyframes glow-pulse {
@@ -69,13 +86,15 @@
       100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
     }
 
-    .links-grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; margin-top: 15px; }
+    .links-grid { display: grid; grid-template-columns: 1fr; gap: 14px; width: 100%; margin-top: 20px; }
+    
     .social-link {
-      display: flex; align-items: center; padding: 14px 20px;
+      display: flex; align-items: center; padding: 16px 22px;
       border: 1px solid rgba(255, 215, 0, 0.3); text-decoration: none;
-      color: #fff; background: rgba(0,0,0,0.4); font-size: 0.9rem;
+      color: #fff; background: rgba(0,0,0,0.4); 
+      font-size: 1.1rem;
     }
-    .social-link span { margin-left: 15px; text-transform: uppercase; }
+    .social-link span { margin-left: 18px; text-transform: uppercase; letter-spacing: 1px; }
 
     .scan-glow {
       position: absolute; top: 0; left: 0; width: 100%; height: 120px;
@@ -88,9 +107,9 @@
     #mute-btn {
       position: fixed; bottom: 20px; right: 20px; z-index: 100;
       background: rgba(0,0,0,0.8); border: 1px solid #ffd700;
-      color: #ffd700; width: 44px; height: 44px; border-radius: 50%;
+      color: #ffd700; width: 48px; height: 48px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
   </style>
 </head>
@@ -186,9 +205,7 @@
     const muteBtn = document.getElementById('mute-btn');
     const wrapper = document.getElementById('main-wrapper');
 
-    // ЖЕСТКИЙ СБРОС НА СТАРТ ПРИ ЗАГРУЗКЕ
     window.addEventListener('load', () => {
-      // Очищаем хэш в адресе (#links) и мотаем вверх
       if (window.location.hash) {
         history.replaceState("", document.title, window.location.pathname + window.location.search);
       }
