@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>LEHLU Gaming - AR Experience</title>
+  <title>LEHLU Gaming - AR</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
+    /* ФИКСИРОВАННЫЙ ФОН */
     .fixed-bg {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -57,21 +57,19 @@
 
     .poster.visible { opacity: 1; transform: scale(1); }
 
-    .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid #ffd700; z-index: 10; }
+    .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid #ffd700; }
 
-    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px 25px; z-index: 10; }
+    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 25px; }
 
-    h1, h2 { font-size: clamp(1.3rem, 6vw, 2.2rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
-    p { font-size: clamp(0.85rem, 4vw, 1.05rem); line-height: 1.6; margin: 10px 0; }
+    h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+    p { font-size: clamp(0.8rem, 3.8vw, 1rem); line-height: 1.5; margin: 8px 0; }
     .highlight { color: #ffd700; font-weight: bold; }
 
-    /* Кнопки */
     .btn {
       text-decoration: none; color: #ffd700; border: 2px solid #ffd700;
-      padding: 12px 35px; margin-top: 20px; font-weight: bold;
+      padding: 12px 30px; margin-top: 15px; font-weight: bold;
       text-transform: uppercase; background: rgba(255, 215, 0, 0.05);
       animation: glow-pulse 2s infinite ease-in-out;
-      cursor: pointer;
     }
 
     @keyframes glow-pulse {
@@ -80,88 +78,49 @@
       100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
     }
 
-    /* Сетка иконок для экрана ссылок */
-    .links-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
-      width: 100%;
-      margin-top: 20px;
-    }
-
+    /* Сетка ссылок */
+    .links-grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; margin-top: 15px; }
+    
     .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 15px 25px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
-      text-decoration: none;
-      color: #fff;
-      background: rgba(255, 215, 0, 0.03);
-      transition: 0.3s;
+      display: flex; align-items: center; padding: 12px 20px;
+      border: 1px solid rgba(255, 215, 0, 0.3); text-decoration: none;
+      color: #fff; background: rgba(255, 215, 0, 0.03); font-size: 0.9rem;
     }
+    .social-link span { margin-left: 15px; text-transform: uppercase; }
 
-    .social-link i {
-      font-size: 1.5rem;
-      margin-right: 20px;
-      color: #ffd700;
-      width: 30px;
-      text-align: center;
-    }
-
-    .social-link span {
-      font-size: 1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .social-link:active {
-      background: rgba(255, 215, 0, 0.2);
-      border-color: #ffd700;
-    }
-
+    /* Эффект луча */
     .scan-glow {
-      position: absolute; top: -20%; left: 0; width: 100%; height: 120px;
-      background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.2), transparent);
-      filter: blur(10px); animation: scan-move 6s linear infinite;
-      z-index: 5; pointer-events: none;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100px;
+      background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.15), transparent);
+      filter: blur(8px); animation: scan-move 5s linear infinite;
+      pointer-events: none;
     }
+    @keyframes scan-move { 0% { transform: translateY(-100px); } 100% { transform: translateY(80vh); } }
 
-    @keyframes scan-move { 0% { transform: translateY(-120px); } 100% { transform: translateY(110vh); } }
-
-    #mute-toggle {
-      position: fixed; bottom: 20px; right: 20px;
-      z-index: 100; background: rgba(0,0,0,0.7);
-      border: 1px solid #ffd700; color: #ffd700;
-      padding: 10px; border-radius: 50%; width: 45px; height: 45px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
+    #mute-btn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 100;
+      background: rgba(0,0,0,0.8); border: 1px solid #ffd700;
+      color: #ffd700; width: 44px; height: 44px; border-radius: 50%;
     }
   </style>
 </head>
 <body>
   <div class="fixed-bg"></div>
 
-  <audio id="bg-audio" loop>
-    <source src="ambient.mp3" type="audio/mpeg">
-  </audio>
-  <audio id="click-sound">
-    <source src="click.mp3" type="audio/mpeg">
-  </audio>
-
-  <button id="mute-toggle">🔊</button>
+  <audio id="bg-audio" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
+  <audio id="click-sound"><source src="click.mp3" type="audio/mpeg"></audio>
+  <button id="mute-btn">🔊</button>
 
   <div class="wrapper" id="main-wrapper">
     
     <section class="section">
       <div class="poster">
         <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
         <div class="content-box">
           <h1>LEHLU Gaming</h1>
           <p>🎭 No Face. No Talk.</p>
-          <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
-          <a href="#links-screen" class="btn play-sfx">All Links</a>
+          <a href="#links-screen" class="btn">All Links</a>
         </div>
       </div>
     </section>
@@ -169,23 +128,10 @@
     <section class="section">
       <div class="poster">
         <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
         <div class="content-box">
           <h2>Manifesto</h2>
           <p>Silent teamwork & cooperative survival.</p>
-          <p>Tactical <span class="highlight">AR</span> immersion.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="poster">
-        <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
-        <div class="content-box">
-          <h2>Visuals</h2>
-          <p>🎮 Minimal UI • 🩸 Dark Vibes</p>
-          <p>Tactical gameplay recordings.</p>
         </div>
       </div>
     </section>
@@ -193,30 +139,16 @@
     <section class="section" id="links-screen">
       <div class="poster">
         <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
         <div class="content-box">
           <h2>Connect</h2>
-          
           <div class="links-grid">
-            <a href="https://twitch.tv/YOUR_CHANNEL" class="social-link play-sfx" target="_blank">
-              <i class="fab fa-twitch"></i>
-              <span>Twitch Live</span>
-            </a>
-            <a href="https://youtube.com/YOUR_CHANNEL" class="social-link play-sfx" target="_blank">
-              <i class="fab fa-youtube"></i>
-              <span>YouTube HQ</span>
-            </a>
-            <a href="https://discord.gg/YOUR_INVITE" class="social-link play-sfx" target="_blank">
-              <i class="fab fa-discord"></i>
-              <span>Discord Squad</span>
-            </a>
-            <a href="https://tiktok.com/@YOUR_ACCOUNT" class="social-link play-sfx" target="_blank">
-              <i class="fab fa-tiktok"></i>
-              <span>TikTok Clips</span>
-            </a>
+            <a href="https://twitch.tv/" class="social-link" target="_blank">🎮 <span>Twitch</span></a>
+            <a href="https://youtube.com/" class="social-link" target="_blank">📺 <span>YouTube</span></a>
+            <a href="https://discord.gg/" class="social-link" target="_blank">💬 <span>Discord</span></a>
+            <a href="https://tiktok.com/" class="social-link" target="_blank">📱 <span>TikTok</span></a>
           </div>
-
-          <a href="mailto:contact@lehlu.com" class="btn play-sfx" style="margin-top: 30px;">Direct Mail</a>
+          <a href="mailto:contact@lehlu.com" class="btn">Contact</a>
         </div>
       </div>
     </section>
@@ -226,30 +158,22 @@
   <script>
     const bgAudio = document.getElementById('bg-audio');
     const clickSound = document.getElementById('click-sound');
-    const muteToggle = document.getElementById('mute-toggle');
     const wrapper = document.getElementById('main-wrapper');
 
-    function initAudio() {
-      bgAudio.volume = 0.2;
-      bgAudio.play().catch(() => {});
-      wrapper.removeEventListener('click', initAudio);
-      wrapper.removeEventListener('touchstart', initAudio);
-    }
-
-    wrapper.addEventListener('click', initAudio);
-    wrapper.addEventListener('touchstart', initAudio);
-
-    document.querySelectorAll('.play-sfx').forEach(btn => {
-      btn.addEventListener('click', () => {
+    // Звук при клике
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.btn') || e.target.closest('.social-link')) {
         clickSound.currentTime = 0;
-        clickSound.play().catch(() => {});
-      });
+        clickSound.play().catch(()=>{});
+      }
+      if (bgAudio.paused) { bgAudio.volume = 0.2; bgAudio.play().catch(()=>{}); }
     });
 
-    muteToggle.addEventListener('click', (e) => {
+    // Mute
+    document.getElementById('mute-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       bgAudio.muted = !bgAudio.muted;
-      muteToggle.innerText = bgAudio.muted ? '🔇' : '🔊';
+      e.target.innerText = bgAudio.muted ? '🔇' : '🔊';
     });
 
     const observer = new IntersectionObserver((entries) => {
@@ -257,8 +181,7 @@
         if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
-
-    document.querySelectorAll('.poster').forEach(poster => observer.observe(poster));
+    document.querySelectorAll('.poster').forEach(p => observer.observe(p));
   </script>
 </body>
 </html>
