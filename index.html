@@ -6,7 +6,7 @@
   <title>LEHLU Gaming - AR (ARC Raiders)</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Базовые настройки */
+    /* Глобальные настройки */
     html, body {
       height: 100%;
       margin: 0;
@@ -35,7 +35,7 @@
       padding: 6vh 0;
     }
 
-    /* Квадратный блок */
+    /* Квадратный блок контента */
     .poster {
       position: relative;
       width: clamp(280px, 65vw, 560px);
@@ -59,24 +59,38 @@
       transition: all 0.8s ease-out;
     }
 
-    /* Класс, который активирует анимацию при скролле */
+    /* Активация анимации */
     .poster.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Логотип на всю ширину */
+    /* ТВОЯ КАРТИНКА: Прямоугольник на всю ширину */
     .arc-logo-header {
       width: 100%; 
       height: auto;
       display: block;
+      margin: 0;
       border-bottom: 2px solid rgba(255, 215, 0, 0.4);
     }
 
-    .content-box { padding: 30px 40px; }
+    .content-box {
+      padding: 30px 40px;
+    }
 
-    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; }
-    p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.6; margin: 12px 0; }
+    h1, h2 { 
+      font-size: clamp(1.4rem, 6vw, 2.4rem); 
+      margin: 10px 0; 
+      color: #ffd700; 
+      text-transform: uppercase; 
+    }
+
+    p { 
+      font-size: clamp(0.85rem, 3.5vw, 1.05rem); 
+      line-height: 1.6; 
+      margin: 12px 0; 
+    }
+
     .highlight { color: #ffd700; font-weight: bold; }
 
     .btn {
@@ -91,7 +105,9 @@
       background: transparent;
       display: inline-block;
     }
+
     .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 25px #ffd700; }
+
   </style>
 </head>
 <body>
@@ -99,7 +115,7 @@
     
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="i-made-a-high-quality-animated-logo-for-arc-raiders-v0-03u728o_yZYnnHf7ddguXcAypOOw-fjNiVXCaDojrVI (1).webp" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h1>LEHLU Gaming</h1>
           <p>🎭 No Face. No Talk.</p>
@@ -111,7 +127,7 @@
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="i-made-a-high-quality-animated-logo-for-arc-raiders-v0-03u728o_yZYnnHf7ddguXcAypOOw-fjNiVXCaDojrVI (1).webp" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Manifesto</h2>
           <p>Silent teamwork & cooperative survival.</p>
@@ -122,18 +138,18 @@
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="i-made-a-high-quality-animated-logo-for-arc-raiders-v0-03u728o_yZYnnHf7ddguXcAypOOw-fjNiVXCaDojrVI (1).webp" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Behind the Play</h2>
           <p>Team-focused runs & tactical extraction.</p>
-          <p>Supporting the community in the machines threat.</p>
+          <p>Supporting the community in the machine threat.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="i-made-a-high-quality-animated-logo-for-arc-raiders-v0-03u728o_yZYnnHf7ddguXcAypOOw-fjNiVXCaDojrVI (1).webp" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Visuals</h2>
           <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
@@ -144,7 +160,7 @@
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <img src="i-made-a-high-quality-animated-logo-for-arc-raiders-v0-03u728o_yZYnnHf7ddguXcAypOOw-fjNiVXCaDojrVI (1).webp" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Join & Win</h2>
           <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
@@ -157,14 +173,13 @@
   </div>
 
   <script>
-    // Скрипт для запуска анимации при появлении блока на экране
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
 
     document.querySelectorAll('.poster').forEach(poster => {
       observer.observe(poster);
