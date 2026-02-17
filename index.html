@@ -37,10 +37,10 @@
       position: relative;
       width: clamp(280px, 65vw, 560px);
       min-height: 60vh;
-      background: rgba(0, 0, 0, 0.75); 
-      backdrop-filter: blur(10px);
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.85); /* Чуть темнее для контраста */
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 215, 0, 0.2); /* Золотистая рамка */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -51,14 +51,15 @@
       overflow: hidden;
     }
 
-    /* Логотип внутри каждого квадрата */
+    /* ВОТ ЭТОТ БЛОК ОТВЕЧАЕТ ЗА ЛОГОТИП ВНУТРИ КВАДРАТА */
     .poster::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
+      /* ПРОВЕРЬ ИМЯ ФАЙЛА НИЖЕ */
       background: url('arc_raiders_logo.jpg') no-repeat center center;
-      background-size: 60%; 
-      opacity: 0.12;
+      background-size: 80%; /* Размер логотипа внутри */
+      opacity: 0.15; /* Прозрачность водяного знака */
       z-index: 0;
     }
 
@@ -77,8 +78,9 @@
       transition: 0.3s;
       text-transform: uppercase;
       font-weight: bold;
+      background: transparent;
     }
-    .btn:hover { background: #ffd700; color: #000; }
+    .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 20px #ffd700; }
   </style>
 </head>
 <body>
@@ -97,7 +99,7 @@
       <div class="poster">
         <h2>Manifesto</h2>
         <p>Silent teamwork & cooperative survival.</p>
-        <p>Pure <span class="highlight">AR</span> immersion. No distractions.</p>
+        <p>Tactical <span class="highlight">AR</span> immersion. No distractions.</p>
       </div>
     </section>
 
@@ -105,7 +107,7 @@
       <div class="poster">
         <h2>Behind the Play</h2>
         <p>Team-focused runs & tactical extraction.</p>
-        <p>Supporting the community, one machine at a time.</p>
+        <p>Helping the community survive the machine threat.</p>
       </div>
     </section>
 
@@ -113,7 +115,7 @@
       <div class="poster">
         <h2>Visuals</h2>
         <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
-        <p>Clean, tactical, and immersive PvE experience.</p>
+        <p>Immersive, clean, tactical gameplay.</p>
       </div>
     </section>
 
@@ -121,7 +123,7 @@
       <div class="poster">
         <h2>Join & Win</h2>
         <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
-        <p>Join our squad runs on TikTok and Twitch.</p>
+        <p>Join squad runs on TikTok and Twitch.</p>
         <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
       </div>
     </section>
