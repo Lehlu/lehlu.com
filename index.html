@@ -10,7 +10,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      /* Твоя пещера остается главным фоном сайта */
+      /* Твой фон с пещерой закреплен на заднем плане */
       background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
@@ -35,10 +35,10 @@
     }
 
     .poster {
-      position: relative; /* Нужно для позиционирования логотипа внутри */
+      position: relative;
       width: clamp(280px, 65vw, 560px);
       min-height: 60vh;
-      background: rgba(0, 0, 0, 0.8); 
+      background: rgba(0, 0, 0, 0.75); 
       backdrop-filter: blur(10px);
       box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -49,29 +49,25 @@
       text-align: center;
       padding: 40px;
       box-sizing: border-box;
-      overflow: hidden; /* Чтобы логотип не вылезал за границы карточки */
+      overflow: hidden;
     }
 
-    /* Добавляем ARC Raiders как фоновый водяной знак ВНУТРИ каждой карточки */
+    /* Логотип ARC Raiders как "водяной знак" внутри КАЖДОГО блока */
     .poster::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      /* Используем твою картинку ARC Raiders */
       background: url('arc_raiders_logo.jpg') no-repeat center center;
-      background-size: 70%; /* Размер логотипа внутри блока */
-      opacity: 0.15; /* Прозрачность, чтобы текст читался (0.1 - 0.2 идеально) */
-      z-index: 0; /* Уводим картинку за текст */
+      background-size: 60%; 
+      opacity: 0.12; /* Прозрачность для каждого блока */
+      z-index: 0;
     }
 
-    /* Поднимаем текст над фоновым логотипом */
-    .poster > * {
-      position: relative;
-      z-index: 1;
-    }
+    .poster > * { position: relative; z-index: 1; }
 
-    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; }
+    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; }
     p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.5; margin: 10px 0; }
+    .highlight { color: #ffd700; font-weight: bold; }
 
     .btn {
       text-decoration: none;
@@ -83,11 +79,7 @@
       text-transform: uppercase;
       font-weight: bold;
     }
-
-    .btn:hover {
-      background: #ffd700;
-      color: #000;
-    }
+    .btn:hover { background: #ffd700; color: #000; }
   </style>
 </head>
 <body>
@@ -97,25 +89,41 @@
       <div class="poster">
         <h1>LEHLU Gaming</h1>
         <p>🎭 No Face. No Talk.</p>
-        <p>⚔️ <strong>AR</strong> PvE Support</p>
-        <a href="#" class="btn">All Links</a>
+        <p>⚔️ <span class="highlight">AR</span> (ARC Raiders) PvE Support</p>
+        <a href="https://lehlu.com" class="btn">All Links</a>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
         <h2>Manifesto</h2>
-        <p>Cooperative survival focus.</p>
-        <p>Tactical runs and team synergy in ARC Raiders.</p>
+        <p>Silent teamwork & cooperative survival.</p>
+        <p>Pure <span class="highlight">AR</span> immersion. No distractions.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <h2>Giveaways</h2>
-        <p>🎁 Weekly <strong>Rare Blueprints</strong>.</p>
-        <p>Join our squad to win loot.</p>
-        <a href="#" class="btn">Join Squad</a>
+        <h2>Behind the Craft</h2>
+        <p>Team-focused runs & tactical extraction.</p>
+        <p>Supporting the community, one machine at a time.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <h2>Visual Style</h2>
+        <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
+        <p>Clean, tactical, and immersive PvE experience.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <h2>Join & Win</h2>
+        <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
+        <p>Join our squad runs on TikTok and Twitch.</p>
+        <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
       </div>
     </section>
 
