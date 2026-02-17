@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>LEHLU Gaming - AR Experience</title>
+  <title>LEHLU Gaming - AR</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* ФИКСИРОВАННЫЙ ФОН */
-    .fixed-bg {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center;
+    /* ФОН ЧЕРЕЗ BODY (самый надежный способ для мобилок) */
+    body {
+      margin: 0; padding: 0;
+      background-color: #000;
+      /* ПРОВЕРЬ ИМЯ ФАЙЛА НИЖЕ СИМВОЛ В СИМВОЛ */
+      background-image: url('lehlu_cave_background_clean_final.jpg');
+      background-attachment: fixed;
+      background-position: center center;
+      background-repeat: no-repeat;
       background-size: cover;
-      z-index: -2;
+      font-family: 'Stint Ultra Expanded', serif;
+      color: #fff;
+      overflow: hidden;
     }
 
-    .overlay {
+    /* Дополнительный слой поверх фона для глубины */
+    .bg-dimmer {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       z-index: -1;
-    }
-
-    html, body {
-      height: 100%; margin: 0; padding: 0;
-      font-family: 'Stint Ultra Expanded', serif;
-      color: #fff; background-color: #000;
-      overflow: hidden;
     }
 
     .wrapper {
@@ -34,8 +34,6 @@
       overflow-y: auto;
       scroll-snap-type: y mandatory;
       -webkit-overflow-scrolling: touch;
-      position: relative;
-      z-index: 1;
     }
 
     .section {
@@ -52,40 +50,32 @@
       width: 90%;
       max-width: 500px;
       min-height: 70vh;
-      background: rgba(0, 0, 0, 0.92);
-      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.93);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 215, 0, 0.5);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 50px rgba(0, 0, 0, 1);
       opacity: 0;
-      transform: scale(0.9) translateY(20px);
-      transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform: scale(0.9);
+      transition: all 0.7s ease-out;
     }
 
-    .poster.visible { opacity: 1; transform: scale(1) translateY(0); }
+    .poster.visible { opacity: 1; transform: scale(1); }
 
     .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid #ffd700; flex-shrink: 0; }
 
-    .content-box { 
-      flex-grow: 1; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-      text-align: center; 
-      padding: 30px 20px; 
-    }
+    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px 20px; }
 
-    h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2.2rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+    h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2.1rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
     p { font-size: clamp(0.85rem, 4vw, 1rem); line-height: 1.6; margin: 8px 0; }
     .highlight { color: #ffd700; font-weight: bold; }
 
     .btn {
       text-decoration: none; color: #ffd700; border: 2px solid #ffd700;
       padding: 12px 35px; margin-top: 20px; font-weight: bold;
-      text-transform: uppercase; background: rgba(255, 215, 0, 0.05);
+      text-transform: uppercase; background: rgba(0,0,0,0.5);
       animation: glow-pulse 2s infinite ease-in-out;
     }
 
@@ -95,18 +85,14 @@
       100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
     }
 
-    /* Список ссылок */
     .links-grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; margin-top: 15px; }
-    
     .social-link {
       display: flex; align-items: center; padding: 14px 20px;
       border: 1px solid rgba(255, 215, 0, 0.3); text-decoration: none;
-      color: #fff; background: rgba(255, 215, 0, 0.05); font-size: 0.9rem;
-      transition: 0.3s;
+      color: #fff; background: rgba(0,0,0,0.4); font-size: 0.9rem;
     }
-    .social-link span { margin-left: 15px; text-transform: uppercase; letter-spacing: 1px; }
+    .social-link span { margin-left: 15px; text-transform: uppercase; }
 
-    /* Эффект размытого луча */
     .scan-glow {
       position: absolute; top: 0; left: 0; width: 100%; height: 120px;
       background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.2), transparent);
@@ -125,8 +111,7 @@
 </head>
 <body>
   
-  <div class="fixed-bg"></div>
-  <div class="overlay"></div>
+  <div class="bg-dimmer"></div>
 
   <audio id="bg-audio" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
   <audio id="click-sound"><source src="click.mp3" type="audio/mpeg"></audio>
@@ -142,7 +127,6 @@
         <div class="content-box">
           <h1>LEHLU Gaming</h1>
           <p>🎭 No Face. No Talk.</p>
-          <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
           <a href="#links-screen" class="btn">All Links</a>
         </div>
       </div>
@@ -156,7 +140,6 @@
           <h2>Manifesto</h2>
           <p>Silent teamwork & cooperative survival.</p>
           <p>Tactical <span class="highlight">AR</span> immersion.</p>
-          <p>No distractions. Just performance.</p>
         </div>
       </div>
     </section>
@@ -168,7 +151,6 @@
         <div class="content-box">
           <h2>Behind the Play</h2>
           <p>Team-focused runs & tactical extraction.</p>
-          <p>Helping the community survive the machines.</p>
         </div>
       </div>
     </section>
@@ -180,7 +162,7 @@
         <div class="content-box">
           <h2>Visuals</h2>
           <p>🎮 Minimal UI • 🩸 Dark Vibes</p>
-          <p>Immersive, clean, tactical gameplay.</p>
+          <p>Tactical gameplay recordings.</p>
         </div>
       </div>
     </section>
@@ -192,7 +174,6 @@
         <div class="content-box">
           <h2>Join & Win</h2>
           <p>🎁 Weekly <span class="highlight">Rare Giveaways</span>.</p>
-          <p>Join squad runs on TikTok and Twitch.</p>
         </div>
       </div>
     </section>
@@ -204,10 +185,10 @@
         <div class="content-box">
           <h2>Connect</h2>
           <div class="links-grid">
-            <a href="https://twitch.tv/lehlu" class="social-link" target="_blank">🎮 <span>Twitch</span></a>
-            <a href="https://youtube.com/@lehlu" class="social-link" target="_blank">📺 <span>YouTube</span></a>
-            <a href="https://discord.gg/lehlu" class="social-link" target="_blank">💬 <span>Discord</span></a>
-            <a href="https://tiktok.com/@lehlu" class="social-link" target="_blank">📱 <span>TikTok</span></a>
+            <a href="https://twitch.tv/lehlu" class="social-link" target="_blank">🎮 <span>Twitch Live</span></a>
+            <a href="https://youtube.com/@lehlu" class="social-link" target="_blank">📺 <span>YouTube HQ</span></a>
+            <a href="https://discord.gg/lehlu" class="social-link" target="_blank">💬 <span>Discord Squad</span></a>
+            <a href="https://tiktok.com/@lehlu" class="social-link" target="_blank">📱 <span>TikTok Clips</span></a>
           </div>
           <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
         </div>
@@ -221,14 +202,18 @@
     const clickSound = document.getElementById('click-sound');
     const wrapper = document.getElementById('main-wrapper');
 
+    // Оживляем звук и страницу при тапе
+    document.addEventListener('touchstart', () => {
+      if (bgAudio.paused) { 
+        bgAudio.volume = 0.2; 
+        bgAudio.play().catch(()=>{}); 
+      }
+    }, {once: true});
+
     document.addEventListener('click', (e) => {
       if (e.target.closest('.btn') || e.target.closest('.social-link')) {
         clickSound.currentTime = 0;
         clickSound.play().catch(()=>{});
-      }
-      if (bgAudio.paused) { 
-        bgAudio.volume = 0.2; 
-        bgAudio.play().catch(()=>{}); 
       }
     });
 
