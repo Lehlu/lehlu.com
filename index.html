@@ -10,17 +10,20 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background: #000;
+      /* Твоя пещера остается главным фоном сайта */
+      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
+      background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
       color: #fff;
       scroll-behavior: smooth;
-      overflow: hidden;
     }
+
     .wrapper {
       height: 100vh;
       overflow-y: auto;
       scroll-snap-type: y mandatory;
     }
+
     .section {
       scroll-snap-align: start;
       min-height: 100vh;
@@ -28,79 +31,91 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    /* ЭКРАН 1: Официальный арт ARC Raiders */
-    #hero {
-      background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('arc_raiders_official.jpg');
-    }
-
-    /* ПОСЛЕДУЮЩИЕ ЭКРАНЫ: Твой фон с пещерой */
-    .cave-bg {
-      background-image: url('lehlu_cave_background_clean_final.jpg');
-      background-attachment: fixed;
+      padding: 6vh 0;
     }
 
     .poster {
-      width: clamp(280px, 70vw, 600px);
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
-      border-left: 4px solid #ffd700; /* Желтый акцент Arc Raiders */
-      padding: 6vh 5vw;
+      position: relative; /* Нужно для позиционирования логотипа внутри */
+      width: clamp(280px, 65vw, 560px);
+      min-height: 60vh;
+      background: rgba(0, 0, 0, 0.8); 
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      padding: 40px;
+      box-sizing: border-box;
+      overflow: hidden; /* Чтобы логотип не вылезал за границы карточки */
     }
 
-    h1 { font-size: clamp(1.8rem, 6vw, 2.8rem); color: #fff; text-transform: uppercase; margin: 0; }
-    .ar-brand { color: #ffd700; } /* Золотой для AR */
-    
-    p { font-size: clamp(0.9rem, 3vw, 1.1rem); line-height: 1.6; color: #ccc; margin: 20px 0; }
-    
+    /* Добавляем ARC Raiders как фоновый водяной знак ВНУТРИ каждой карточки */
+    .poster::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      /* Используем твою картинку ARC Raiders */
+      background: url('arc_raiders_logo.jpg') no-repeat center center;
+      background-size: 70%; /* Размер логотипа внутри блока */
+      opacity: 0.15; /* Прозрачность, чтобы текст читался (0.1 - 0.2 идеально) */
+      z-index: 0; /* Уводим картинку за текст */
+    }
+
+    /* Поднимаем текст над фоновым логотипом */
+    .poster > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; }
+    p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.5; margin: 10px 0; }
+
     .btn {
-      display: inline-block;
       text-decoration: none;
-      color: #000;
-      background: #ffd700;
-      padding: 14px 35px;
-      font-weight: bold;
+      color: #fff;
+      border: 2px solid #ffd700;
+      padding: 0.8em 1.8em;
+      margin-top: 20px;
       transition: 0.3s;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      font-weight: bold;
     }
-    .btn:hover { background: #fff; transform: translateY(-3px); }
 
-    .highlight { color: #ffd700; }
+    .btn:hover {
+      background: #ffd700;
+      color: #000;
+    }
   </style>
 </head>
 <body>
   <div class="wrapper">
     
-    <section class="section" id="hero">
+    <section class="section">
       <div class="poster">
-        <h1>LEHLU <span class="ar-brand">AR</span></h1>
-        <p>🎭 No Face. No Talk.<br>
-        <span class="highlight">PvE Support • Tactical Extraction</span></p>
-        <a href="#about" class="btn">Enter the Zone</a>
+        <h1>LEHLU Gaming</h1>
+        <p>🎭 No Face. No Talk.</p>
+        <p>⚔️ <strong>AR</strong> PvE Support</p>
+        <a href="#" class="btn">All Links</a>
       </div>
     </section>
 
-    <section class="section cave-bg" id="about">
+    <section class="section">
       <div class="poster">
-        <h2>The Mission</h2>
-        <p>Cooperative survival in the heart of the machine threat. We help, we loot, we survive together.</p>
-        <p>Silent, immersive runs for the <span class="highlight">ARC Raiders</span> community.</p>
+        <h2>Manifesto</h2>
+        <p>Cooperative survival focus.</p>
+        <p>Tactical runs and team synergy in ARC Raiders.</p>
       </div>
     </section>
 
-    <section class="section cave-bg">
+    <section class="section">
       <div class="poster">
-        <h2>Blueprints</h2>
-        <p>🎁 Every week we drop <span class="highlight">Rare Blueprints</span> and rewards for our squad members.</p>
-        <p>Watch live on TikTok and Twitch to claim yours.</p>
-        <a href="https://www.tiktok.com/@YOUR_NIK" class="btn">Join Live</a>
+        <h2>Giveaways</h2>
+        <p>🎁 Weekly <strong>Rare Blueprints</strong>.</p>
+        <p>Join our squad to win loot.</p>
+        <a href="#" class="btn">Join Squad</a>
       </div>
     </section>
 
