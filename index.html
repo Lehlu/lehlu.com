@@ -6,7 +6,7 @@
   <title>LEHLU Gaming - AR (ARC Raiders)</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Глобальные стили */
+    /* Глобальные настройки */
     html, body {
       height: 100%;
       margin: 0;
@@ -36,31 +36,38 @@
       padding: 6vh 0;
     }
 
-    /* Квадратные блоки контента */
+    /* Карточка (Квадрат) */
     .poster {
       position: relative;
       width: clamp(280px, 65vw, 560px);
       min-height: 70vh;
-      background: rgba(0, 0, 0, 0.88); 
+      background: rgba(0, 0, 0, 0.9); 
       backdrop-filter: blur(15px);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
       border: 1px solid rgba(255, 215, 0, 0.3); 
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding: 50px 40px;
+      padding: 0; 
       box-sizing: border-box;
+      overflow: hidden;
     }
 
-    /* Прямоугольный логотип НАД текстом */
-    .arc-logo {
-      width: 100%;
-      max-width: 320px; /* Размер логотипа */
+    /* Логотип: Растянут на всю ширину квадрата сверху */
+    .arc-logo-full {
+      width: 100%; 
       height: auto;
-      margin-bottom: 30px; /* Отступ от картинки до текста */
+      max-height: 220px; 
+      object-fit: cover; 
       display: block;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    /* Контейнер для текста */
+    .content-padding {
+      padding: 30px 40px 40px 40px;
     }
 
     h1, h2 { 
@@ -76,31 +83,22 @@
       margin: 12px 0; 
     }
 
-    .highlight { 
-      color: #ffd700; 
-      font-weight: bold; 
-    }
+    .highlight { color: #ffd700; font-weight: bold; }
 
-    /* Кнопки */
     .btn {
       text-decoration: none;
       color: #fff;
       border: 2px solid #ffd700;
       padding: 0.8em 2em;
-      margin-top: 25px;
+      margin-top: 20px;
       transition: 0.3s;
       text-transform: uppercase;
       font-weight: bold;
       background: transparent;
       display: inline-block;
-      letter-spacing: 1px;
     }
 
-    .btn:hover { 
-      background: #ffd700; 
-      color: #000; 
-      box-shadow: 0 0 25px #ffd700; 
-    }
+    .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 25px #ffd700; }
 
   </style>
 </head>
@@ -109,48 +107,58 @@
     
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
-        <h1>LEHLU Gaming</h1>
-        <p>🎭 No Face. No Talk.</p>
-        <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
-        <a href="https://lehlu.com" class="btn">All Links</a>
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-full">
+        <div class="content-padding">
+          <h1>LEHLU Gaming</h1>
+          <p>🎭 No Face. No Talk.</p>
+          <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
+          <a href="https://lehlu.com" class="btn">All Links</a>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
-        <h2>Manifesto</h2>
-        <p>Silent teamwork & cooperative survival.</p>
-        <p>Tactical <span class="highlight">AR</span> immersion. No distractions.</p>
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-full">
+        <div class="content-padding">
+          <h2>Manifesto</h2>
+          <p>Silent teamwork & cooperative survival.</p>
+          <p>Tactical <span class="highlight">AR</span> immersion. No distractions.</p>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
-        <h2>Behind the Play</h2>
-        <p>Team-focused runs & tactical extraction.</p>
-        <p>Supporting the community in the machine threat.</p>
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-full">
+        <div class="content-padding">
+          <h2>Behind the Play</h2>
+          <p>Team-focused runs & tactical extraction.</p>
+          <p>Supporting the community in the machine threat.</p>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
-        <h2>Visuals</h2>
-        <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
-        <p>Immersive, clean, tactical gameplay.</p>
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-full">
+        <div class="content-padding">
+          <h2>Visuals</h2>
+          <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
+          <p>Immersive, clean, tactical gameplay.</p>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
-        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
-        <h2>Join & Win</h2>
-        <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
-        <p>Join squad runs on TikTok and Twitch.</p>
-        <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo-full">
+        <div class="content-padding">
+          <h2>Join & Win</h2>
+          <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
+          <p>Join squad runs on TikTok and Twitch.</p>
+          <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
+        </div>
       </div>
     </section>
 
