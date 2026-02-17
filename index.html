@@ -11,7 +11,6 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      /* ТВОЙ ФОН: пещера закреплена */
       background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
@@ -37,15 +36,15 @@
       padding: 6vh 0;
     }
 
-    /* Карточки (Блоги) */
+    /* Карточки (Квадраты) */
     .poster {
       position: relative;
       width: clamp(280px, 65vw, 560px);
-      min-height: 60vh;
+      min-height: 65vh;
       background: rgba(0, 0, 0, 0.85); 
       backdrop-filter: blur(12px);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
-      border: 1px solid rgba(255, 215, 0, 0.2); 
+      border: 1px solid rgba(255, 215, 0, 0.3); 
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -53,25 +52,15 @@
       text-align: center;
       padding: 40px;
       box-sizing: border-box;
-      overflow: hidden;
     }
 
-    /* ЛОГОТИП ARC RAIDERS ВНУТРИ КАЖДОГО КВАДРАТА */
-    .poster::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      /* Убедись, что файл arc_raiders_logo.jpg лежит в корне репозитория */
-      background: url('arc_raiders_logo.jpg') no-repeat center center;
-      background-size: 80%; 
-      opacity: 0.15; /* Прозрачность логотипа внутри блока */
-      z-index: 0;
-    }
-
-    /* Чтобы текст был поверх логотипа */
-    .poster > * { 
-      position: relative; 
-      z-index: 1; 
+    /* Стиль для прямоугольного логотипа НАД текстом */
+    .arc-logo {
+      width: 100%;
+      max-width: 300px; /* Ограничиваем ширину логотипа */
+      height: auto;
+      margin-bottom: 25px; /* Отступ от логотипа до текста */
+      display: block;
     }
 
     h1, h2 { 
@@ -119,15 +108,17 @@
     
     <section class="section">
       <div class="poster">
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h1>LEHLU Gaming</h1>
         <p>🎭 No Face. No Talk.</p>
-        <p>⚔️ <span class="highlight">AR</span> (ARC Raiders) PvE Support</p>
+        <p>⚔️ <span class="highlight">AR</span> PvE Support</p>
         <a href="https://lehlu.com" class="btn">All Links</a>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h2>Manifesto</h2>
         <p>Silent teamwork & cooperative survival.</p>
         <p>Tactical <span class="highlight">AR</span> immersion. No distractions.</p>
@@ -136,14 +127,16 @@
 
     <section class="section">
       <div class="poster">
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h2>Behind the Play</h2>
         <p>Team-focused runs & tactical extraction.</p>
-        <p>Helping the community survive the machine threat.</p>
+        <p>Supporting the community in the machine threat.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="poster">
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h2>Visuals</h2>
         <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
         <p>Immersive, clean, tactical gameplay.</p>
@@ -152,6 +145,7 @@
 
     <section class="section">
       <div class="poster">
+        <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h2>Join & Win</h2>
         <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
         <p>Join squad runs on TikTok and Twitch.</p>
