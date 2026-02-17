@@ -6,6 +6,7 @@
   <title>LEHLU Gaming - AR</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
+    /* Базовые настройки фона и шрифтов */
     html, body {
       height: 100%; margin: 0; padding: 0;
       background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
@@ -16,6 +17,7 @@
     .wrapper { height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; }
     .section { scroll-snap-align: start; min-height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 6vh 0; }
     
+    /* Основной квадратный блок */
     .poster {
       position: relative; width: clamp(280px, 65vw, 560px); min-height: 70vh;
       background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(15px);
@@ -26,16 +28,17 @@
     }
     .poster.visible { opacity: 1; transform: translateY(0); }
     
+    /* Логотип в шапке блока */
     .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid rgba(255, 215, 0, 0.4); flex-shrink: 0; }
     
-    /* КОНТЕЙНЕР ДЛЯ ТЕКСТА: Занимает всё место и центрирует содержимое */
+    /* Контейнер для текста: занимает всё пространство под лого и центрирует контент */
     .content-box { 
-      flex-grow: 1; /* Растягивается на всё свободное место под логотипом */
+      flex-grow: 1; 
       display: flex;
       flex-direction: column;
-      justify-content: center; /* Центрирует текст по вертикали внутри этой области */
+      justify-content: center; 
       align-items: center;
-      padding: 20px 40px; 
+      padding: 30px 40px; 
       width: 100%; 
       box-sizing: border-box; 
     }
@@ -44,7 +47,7 @@
     p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.6; margin: 8px 0; }
     .highlight { color: #ffd700; font-weight: bold; }
     
-    .btn { text-decoration: none; color: #fff; border: 2px solid #ffd700; padding: 0.8em 2.2em; margin-top: 15px; transition: 0.3s; text-transform: uppercase; font-weight: bold; background: transparent; display: inline-block; }
+    .btn { text-decoration: none; color: #fff; border: 2px solid #ffd700; padding: 0.8em 2.2em; margin-top: 20px; transition: 0.3s; text-transform: uppercase; font-weight: bold; background: transparent; display: inline-block; }
     .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 25px #ffd700; }
   </style>
 </head>
@@ -81,7 +84,7 @@
         <div class="content-box">
           <h2>Behind the Play</h2>
           <p>Team-focused runs & tactical extraction.</p>
-          <p>Helping the community survive.</p>
+          <p>Helping the community survive the machine threat.</p>
         </div>
       </div>
     </section>
@@ -102,7 +105,7 @@
         <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Join & Win</h2>
-          <p>🎁 Weekly <span class="highlight">Rare Giveaways</span>.</p>
+          <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
           <p>Join squad runs on TikTok and Twitch.</p>
           <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
         </div>
@@ -112,6 +115,7 @@
   </div>
 
   <script>
+    // Активация анимации при попадании в зону видимости
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('visible'); }
