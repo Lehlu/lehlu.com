@@ -6,7 +6,7 @@
   <title>LEHLU Gaming - AR (ARC Raiders)</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Глобальные настройки страницы */
+    /* Базовые настройки */
     html, body {
       height: 100%;
       margin: 0;
@@ -23,7 +23,6 @@
       height: 100vh;
       overflow-y: auto;
       scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
     }
 
     .section {
@@ -36,55 +35,50 @@
       padding: 6vh 0;
     }
 
-    /* Квадратный блок контента */
+    /* Квадратный блок */
     .poster {
       position: relative;
       width: clamp(280px, 65vw, 560px);
       min-height: 70vh;
       background: rgba(0, 0, 0, 0.92); 
       backdrop-filter: blur(15px);
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 1);
       border: 1px solid rgba(255, 215, 0, 0.4); 
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
       text-align: center;
-      padding: 0; /* Убираем поля, чтобы логотип растянулся */
+      padding: 0;
       box-sizing: border-box;
       overflow: hidden;
+      
+      /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
     }
 
-    /* ЛОГОТИП: Прямоугольник на всю ширину верхней части */
+    /* Класс, который активирует анимацию при скролле */
+    .poster.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Логотип на всю ширину */
     .arc-logo-header {
       width: 100%; 
       height: auto;
       display: block;
-      margin: 0;
       border-bottom: 2px solid rgba(255, 215, 0, 0.4);
     }
 
-    /* Контейнер для текстовой части */
-    .content-box {
-      padding: 30px 40px;
-    }
+    .content-box { padding: 30px 40px; }
 
-    h1, h2 { 
-      font-size: clamp(1.4rem, 6vw, 2.4rem); 
-      margin: 10px 0; 
-      color: #ffd700; 
-      text-transform: uppercase; 
-    }
-
-    p { 
-      font-size: clamp(0.85rem, 3.5vw, 1.05rem); 
-      line-height: 1.6; 
-      margin: 12px 0; 
-    }
-
+    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; }
+    p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.6; margin: 12px 0; }
     .highlight { color: #ffd700; font-weight: bold; }
 
-    /* Кнопка */
     .btn {
       text-decoration: none;
       color: #fff;
@@ -97,16 +91,11 @@
       background: transparent;
       display: inline-block;
     }
-
-    .btn:hover { 
-      background: #ffd700; 
-      color: #000; 
-      box-shadow: 0 0 25px #ffd700; 
-    }
+    .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 25px #ffd700; }
   </style>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper" id="scroll-container">
     
     <section class="section">
       <div class="poster">
@@ -137,7 +126,7 @@
         <div class="content-box">
           <h2>Behind the Play</h2>
           <p>Team-focused runs & tactical extraction.</p>
-          <p>Supporting the community in the machine threat.</p>
+          <p>Supporting the community in the machines threat.</p>
         </div>
       </div>
     </section>
@@ -166,5 +155,20 @@
     </section>
 
   </div>
+
+  <script>
+    // Скрипт для запуска анимации при появлении блока на экране
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.poster').forEach(poster => {
+      observer.observe(poster);
+    });
+  </script>
 </body>
 </html>
