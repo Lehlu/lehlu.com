@@ -3,62 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>LEHLU Gaming - AR</title>
+  <title>LEHLU Gaming - AR Experience</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* ФОН ЧЕРЕЗ BODY (самый надежный способ для мобилок) */
+    /* Фоновая картинка */
     body {
       margin: 0; padding: 0;
-      background-color: #000;
-      /* ПРОВЕРЬ ИМЯ ФАЙЛА НИЖЕ СИМВОЛ В СИМВОЛ */
-      background-image: url('lehlu_cave_background_clean_final.jpg');
-      background-attachment: fixed;
-      background-position: center center;
-      background-repeat: no-repeat;
+      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
       color: #fff;
       overflow: hidden;
     }
 
-    /* Дополнительный слой поверх фона для глубины */
     .bg-dimmer {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); z-index: -1;
     }
 
     .wrapper {
-      height: 100vh;
-      overflow-y: auto;
-      scroll-snap-type: y mandatory;
-      -webkit-overflow-scrolling: touch;
+      height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
     }
 
     .section {
-      scroll-snap-align: start;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      scroll-snap-align: start; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
       padding: 20px 0;
     }
 
     .poster {
-      position: relative;
-      width: 90%;
-      max-width: 500px;
-      min-height: 70vh;
-      background: rgba(0, 0, 0, 0.93);
-      backdrop-filter: blur(10px);
+      position: relative; width: 90%; max-width: 500px; min-height: 70vh;
+      background: rgba(0, 0, 0, 0.93); backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 215, 0, 0.5);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      display: flex; flex-direction: column; overflow: hidden;
       box-shadow: 0 0 50px rgba(0, 0, 0, 1);
-      opacity: 0;
-      transform: scale(0.9);
+      opacity: 0; transform: scale(0.9);
       transition: all 0.7s ease-out;
     }
 
@@ -70,13 +50,13 @@
 
     h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2.1rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
     p { font-size: clamp(0.85rem, 4vw, 1rem); line-height: 1.6; margin: 8px 0; }
-    .highlight { color: #ffd700; font-weight: bold; }
-
+    
     .btn {
       text-decoration: none; color: #ffd700; border: 2px solid #ffd700;
       padding: 12px 35px; margin-top: 20px; font-weight: bold;
       text-transform: uppercase; background: rgba(0,0,0,0.5);
       animation: glow-pulse 2s infinite ease-in-out;
+      cursor: pointer;
     }
 
     @keyframes glow-pulse {
@@ -106,6 +86,7 @@
       background: rgba(0,0,0,0.8); border: 1px solid #ffd700;
       color: #ffd700; width: 44px; height: 44px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; outline: none;
     }
   </style>
 </head>
@@ -113,21 +94,25 @@
   
   <div class="bg-dimmer"></div>
 
-  <audio id="bg-audio" loop><source src="ambient.mp3" type="audio/mpeg"></audio>
-  <audio id="click-sound"><source src="click.mp3" type="audio/mpeg"></audio>
+  <audio id="bg-audio" loop preload="auto">
+    <source src="ambient.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="click-sound" preload="auto">
+    <source src="click.mp3" type="audio/mpeg">
+  </audio>
   
-  <button id="mute-btn">🔊</button>
+  <button id="mute-btn">🔇</button>
 
   <div class="wrapper" id="main-wrapper">
     
-    <section class="section">
+    <section class="section" id="hero">
       <div class="poster">
         <div class="scan-glow"></div>
         <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
         <div class="content-box">
           <h1>LEHLU Gaming</h1>
           <p>🎭 No Face. No Talk.</p>
-          <a href="#links-screen" class="btn">All Links</a>
+          <a href="#links" class="btn sfx-trigger">All Links</a>
         </div>
       </div>
     </section>
@@ -144,53 +129,18 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="poster">
-        <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
-        <div class="content-box">
-          <h2>Behind the Play</h2>
-          <p>Team-focused runs & tactical extraction.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="poster">
-        <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
-        <div class="content-box">
-          <h2>Visuals</h2>
-          <p>🎮 Minimal UI • 🩸 Dark Vibes</p>
-          <p>Tactical gameplay recordings.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="poster">
-        <div class="scan-glow"></div>
-        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
-        <div class="content-box">
-          <h2>Join & Win</h2>
-          <p>🎁 Weekly <span class="highlight">Rare Giveaways</span>.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="links-screen">
+    <section class="section" id="links">
       <div class="poster">
         <div class="scan-glow"></div>
         <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
         <div class="content-box">
           <h2>Connect</h2>
           <div class="links-grid">
-            <a href="https://twitch.tv/lehlu" class="social-link" target="_blank">🎮 <span>Twitch Live</span></a>
-            <a href="https://youtube.com/@lehlu" class="social-link" target="_blank">📺 <span>YouTube HQ</span></a>
-            <a href="https://discord.gg/lehlu" class="social-link" target="_blank">💬 <span>Discord Squad</span></a>
-            <a href="https://tiktok.com/@lehlu" class="social-link" target="_blank">📱 <span>TikTok Clips</span></a>
+            <a href="https://twitch.tv/lehlu" class="social-link sfx-trigger" target="_blank">🎮 <span>Twitch</span></a>
+            <a href="https://youtube.com/@lehlu" class="social-link sfx-trigger" target="_blank">📺 <span>YouTube</span></a>
+            <a href="https://discord.gg/lehlu" class="social-link sfx-trigger" target="_blank">💬 <span>Discord</span></a>
           </div>
-          <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
+          <a href="mailto:contact@lehlu.com" class="btn sfx-trigger">Contact</a>
         </div>
       </div>
     </section>
@@ -200,29 +150,48 @@
   <script>
     const bgAudio = document.getElementById('bg-audio');
     const clickSound = document.getElementById('click-sound');
+    const muteBtn = document.getElementById('mute-btn');
     const wrapper = document.getElementById('main-wrapper');
 
-    // Оживляем звук и страницу при тапе
-    document.addEventListener('touchstart', () => {
-      if (bgAudio.paused) { 
-        bgAudio.volume = 0.2; 
-        bgAudio.play().catch(()=>{}); 
-      }
-    }, {once: true});
+    // ПРИНУДИТЕЛЬНЫЙ СКРОЛЛ ВВЕРХ
+    window.scrollTo(0, 0);
+    wrapper.scrollTo(0, 0);
 
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.btn') || e.target.closest('.social-link')) {
+    // ФУНКЦИЯ ЗАПУСКА ЗВУКА
+    function startExperience() {
+      if (bgAudio.paused) {
+        bgAudio.volume = 0.4;
+        bgAudio.play().then(() => {
+          muteBtn.innerText = '🔊';
+        }).catch(err => console.log("Audio play blocked"));
+      }
+    }
+
+    // Слушаем любой клик или касание для старта звука
+    document.body.addEventListener('click', startExperience, { once: false });
+    document.body.addEventListener('touchstart', startExperience, { once: false });
+
+    // Звук клика для кнопок
+    document.querySelectorAll('.sfx-trigger').forEach(el => {
+      el.addEventListener('click', () => {
         clickSound.currentTime = 0;
         clickSound.play().catch(()=>{});
+      });
+    });
+
+    // Кнопка Mute
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (bgAudio.muted) {
+        bgAudio.muted = false;
+        muteBtn.innerText = '🔊';
+      } else {
+        bgAudio.muted = true;
+        muteBtn.innerText = '🔇';
       }
     });
 
-    document.getElementById('mute-btn').addEventListener('click', (e) => {
-      e.stopPropagation();
-      bgAudio.muted = !bgAudio.muted;
-      e.target.innerText = bgAudio.muted ? '🔇' : '🔊';
-    });
-
+    // Анимация появления
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) entry.target.classList.add('visible');
