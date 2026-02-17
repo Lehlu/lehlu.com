@@ -10,7 +10,6 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      /* Твой фон с пещерой закреплен на заднем плане */
       background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
@@ -52,14 +51,14 @@
       overflow: hidden;
     }
 
-    /* Логотип ARC Raiders как "водяной знак" внутри КАЖДОГО блока */
+    /* Логотип внутри каждого квадрата */
     .poster::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: url('arc_raiders_logo.jpg') no-repeat center center;
       background-size: 60%; 
-      opacity: 0.12; /* Прозрачность для каждого блока */
+      opacity: 0.12;
       z-index: 0;
     }
 
@@ -104,7 +103,7 @@
 
     <section class="section">
       <div class="poster">
-        <h2>Behind the Craft</h2>
+        <h2>Behind the Play</h2>
         <p>Team-focused runs & tactical extraction.</p>
         <p>Supporting the community, one machine at a time.</p>
       </div>
@@ -112,7 +111,7 @@
 
     <section class="section">
       <div class="poster">
-        <h2>Visual Style</h2>
+        <h2>Visuals</h2>
         <p>🎮 Minimal UI • 🩸 Dark Sci-Fi Vibes</p>
         <p>Clean, tactical, and immersive PvE experience.</p>
       </div>
