@@ -1,1 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LEHLU Gaming - AR Experience</title>
+  <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    .fixed-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center;
+      background-size: cover;
+      z-index: -1;
+    }
 
+    html, body {
+      height: 100%; margin: 0; padding: 0;
+      font-family: 'Stint Ultra Expanded', serif;
+      color: #fff; background-color: #000;
+      overflow: hidden;
+    }
+
+    .wrapper {
+      height: 100vh;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+    }
+
+    .poster {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      min-height: 70vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.6s ease-out;
+    }
+
+    .poster.visible { opacity: 1; transform: scale(1); }
+
+    .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid #ffd700; z-index: 10; }
+
+    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px 25px; z-index: 10; }
+
+    h1, h2 { font-size: clamp(1.3rem, 6vw, 2.2rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
+    p { font-size: clamp(0.85rem, 4vw, 1.05rem); line-height: 1.6; margin: 10px 0; }
+    .highlight { color: #ffd700; font-weight: bold; }
+
+    /* Кнопки */
+    .btn {
+      text-decoration: none; color: #ffd700; border: 2px solid #ffd700;
+      padding: 12px 35px; margin-top: 20px; font-weight: bold;
+      text-transform: uppercase; background: rgba(255, 215, 0, 0.05);
+      animation: glow-pulse 2s infinite ease-in-out;
+      cursor: pointer;
+    }
+
+    @keyframes glow-pulse {
+      0% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+      50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
+      100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.2); }
+    }
+
+    /* Сетка иконок для экрана ссылок */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 15px 25px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 215, 0, 0.03);
+      transition: 0.3s;
+    }
+
+    .social-link i {
+      font-size: 1.5rem;
+      margin-right: 20px;
+      color: #ffd700;
+      width: 30px;
+      text-align: center;
+    }
+
+    .social-link span {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .social-link:active {
+      background: rgba(255, 215, 0, 0.2);
+      border-color: #ffd700;
+    }
+
+    .scan-glow {
+      position: absolute; top: -20%; left: 0; width: 100%; height: 120px;
+      background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.2), transparent);
+      filter: blur(10px); animation: scan-move 6s linear infinite;
+      z-index: 5; pointer-events: none;
+    }
+
+    @keyframes scan-move { 0% { transform: translateY(-120px); } 100% { transform: translateY(110vh); } }
+
+    #mute-toggle {
+      position: fixed; bottom: 20px; right: 20px;
+      z-index: 100; background: rgba(0,0,0,0.7);
+      border: 1px solid #ffd700; color: #ffd700;
+      padding: 10px; border-radius: 50%; width: 45px; height: 45px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="fixed-bg"></div>
+
+  <audio id="bg-audio" loop>
+    <source src="ambient.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="click-sound">
+    <source src="click.mp3" type="audio/mpeg">
+  </audio>
+
+  <button id="mute-toggle">🔊</button>
+
+  <div class="wrapper" id="main-wrapper">
+    
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <div class="content-box">
+          <h1>LEHLU Gaming</h1>
+          <p>🎭 No Face. No Talk.</p>
+          <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
+          <a href="#links-screen" class="btn play-sfx">All Links</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Manifesto</h2>
+          <p>Silent teamwork & cooperative survival.</p>
+          <p>Tactical <span class="highlight">AR</span> immersion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Visuals</h2>
+          <p>🎮 Minimal UI • 🩸 Dark Vibes</p>
+          <p>Tactical gameplay recordings.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="links-screen">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Connect</h2>
+          
+          <div class="links-grid">
+            <a href="https://twitch.tv/YOUR_CHANNEL" class="social-link play-sfx" target="_blank">
+              <i class="fab fa-twitch"></i>
+              <span>Twitch Live</span>
+            </a>
+            <a href="https://youtube.com/YOUR_CHANNEL" class="social-link play-sfx" target="_blank">
+              <i class="fab fa-youtube"></i>
+              <span>YouTube HQ</span>
+            </a>
+            <a href="https://discord.gg/YOUR_INVITE" class="social-link play-sfx" target="_blank">
+              <i class="fab fa-discord"></i>
+              <span>Discord Squad</span>
+            </a>
+            <a href="https://tiktok.com/@YOUR_ACCOUNT" class="social-link play-sfx" target="_blank">
+              <i class="fab fa-tiktok"></i>
+              <span>TikTok Clips</span>
+            </a>
+          </div>
+
+          <a href="mailto:contact@lehlu.com" class="btn play-sfx" style="margin-top: 30px;">Direct Mail</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    const bgAudio = document.getElementById('bg-audio');
+    const clickSound = document.getElementById('click-sound');
+    const muteToggle = document.getElementById('mute-toggle');
+    const wrapper = document.getElementById('main-wrapper');
+
+    function initAudio() {
+      bgAudio.volume = 0.2;
+      bgAudio.play().catch(() => {});
+      wrapper.removeEventListener('click', initAudio);
+      wrapper.removeEventListener('touchstart', initAudio);
+    }
+
+    wrapper.addEventListener('click', initAudio);
+    wrapper.addEventListener('touchstart', initAudio);
+
+    document.querySelectorAll('.play-sfx').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clickSound.currentTime = 0;
+        clickSound.play().catch(() => {});
+      });
+    });
+
+    muteToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      bgAudio.muted = !bgAudio.muted;
+      muteToggle.innerText = bgAudio.muted ? '🔇' : '🔊';
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.poster').forEach(poster => observer.observe(poster));
+  </script>
+</body>
+</html>
