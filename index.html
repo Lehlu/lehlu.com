@@ -6,7 +6,7 @@
   <title>LEHLU Gaming - AR (ARC Raiders)</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Глобальные настройки */
+    /* Глобальные стили */
     html, body {
       height: 100%;
       margin: 0;
@@ -36,13 +36,13 @@
       padding: 6vh 0;
     }
 
-    /* Карточки (Квадраты) */
+    /* Квадратные блоки контента */
     .poster {
       position: relative;
       width: clamp(280px, 65vw, 560px);
-      min-height: 65vh;
-      background: rgba(0, 0, 0, 0.85); 
-      backdrop-filter: blur(12px);
+      min-height: 70vh;
+      background: rgba(0, 0, 0, 0.88); 
+      backdrop-filter: blur(15px);
       box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
       border: 1px solid rgba(255, 215, 0, 0.3); 
       display: flex;
@@ -50,16 +50,16 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 40px;
+      padding: 50px 40px;
       box-sizing: border-box;
     }
 
-    /* Стиль для прямоугольного логотипа НАД текстом */
+    /* Прямоугольный логотип НАД текстом */
     .arc-logo {
       width: 100%;
-      max-width: 300px; /* Ограничиваем ширину логотипа */
+      max-width: 320px; /* Размер логотипа */
       height: auto;
-      margin-bottom: 25px; /* Отступ от логотипа до текста */
+      margin-bottom: 30px; /* Отступ от картинки до текста */
       display: block;
     }
 
@@ -72,8 +72,8 @@
 
     p { 
       font-size: clamp(0.85rem, 3.5vw, 1.05rem); 
-      line-height: 1.5; 
-      margin: 10px 0; 
+      line-height: 1.6; 
+      margin: 12px 0; 
     }
 
     .highlight { 
@@ -86,19 +86,20 @@
       text-decoration: none;
       color: #fff;
       border: 2px solid #ffd700;
-      padding: 0.8em 1.8em;
-      margin-top: 20px;
+      padding: 0.8em 2em;
+      margin-top: 25px;
       transition: 0.3s;
       text-transform: uppercase;
       font-weight: bold;
       background: transparent;
       display: inline-block;
+      letter-spacing: 1px;
     }
 
     .btn:hover { 
       background: #ffd700; 
       color: #000; 
-      box-shadow: 0 0 20px #ffd700; 
+      box-shadow: 0 0 25px #ffd700; 
     }
 
   </style>
@@ -111,7 +112,7 @@
         <img src="arc_raiders_logo.jpg" alt="ARC Raiders" class="arc-logo">
         <h1>LEHLU Gaming</h1>
         <p>🎭 No Face. No Talk.</p>
-        <p>⚔️ <span class="highlight">AR</span> PvE Support</p>
+        <p>⚔️ <span class="highlight">AR</span> PvE Support Focus</p>
         <a href="https://lehlu.com" class="btn">All Links</a>
       </div>
     </section>
