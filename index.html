@@ -2,57 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEHLU Gaming - AR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LEHLU Gaming - AR Mobile</title>
   <link href="https://fonts.googleapis.com/css2?family=Stint+Ultra+Expanded&display=swap" rel="stylesheet">
   <style>
-    /* Базовые настройки фона и шрифтов */
+    /* Глобальные настройки */
     html, body {
       height: 100%; margin: 0; padding: 0;
       background: #000 url('lehlu_cave_background_clean_final.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Stint Ultra Expanded', serif;
       color: #fff; scroll-behavior: smooth; overflow: hidden;
+      -webkit-tap-highlight-color: transparent; /* Убирает синее выделение при тапе на мобильных */
     }
-    .wrapper { height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; }
-    .section { scroll-snap-align: start; min-height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 6vh 0; }
+
+    /* Эффект шума монитора (статичный для мобилок) */
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px, transparent 1px, transparent 2px);
+      pointer-events: none; z-index: 10;
+    }
+
+    .wrapper { height: 100vh; overflow-y: auto; scroll-snap-type: y mandatory; position: relative; z-index: 1; }
+    .section { scroll-snap-align: start; min-height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 20px 0; }
     
-    /* Основной квадратный блок */
+    /* Карточка, оптимизированная под вертикальный экран */
     .poster {
-      position: relative; width: clamp(280px, 65vw, 560px); min-height: 70vh;
-      background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(15px);
-      box-shadow: 0 0 60px rgba(0, 0, 0, 1); border: 1px solid rgba(255, 215, 0, 0.4); 
+      position: relative; 
+      width: 90%; /* Шире для мобильных */
+      max-width: 500px;
+      min-height: 65vh;
+      background: rgba(0, 0, 0, 0.94); 
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 1); 
+      border: 1px solid rgba(255, 215, 0, 0.3); 
       display: flex; flex-direction: column; align-items: center;
       text-align: center; padding: 0; box-sizing: border-box; overflow: hidden;
-      opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out;
+      
+      /* Плавное появление при скролле */
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+
     .poster.visible { opacity: 1; transform: translateY(0); }
-    
-    /* Логотип в шапке блока */
+
+    /* Сканирующая полоса - теперь более заметная на мобильных */
+    .poster::after {
+      content: "";
+      position: absolute; top: -100%; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.07), transparent);
+      animation: scan 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
+
     .arc-logo-header { width: 100%; height: auto; display: block; border-bottom: 2px solid rgba(255, 215, 0, 0.4); flex-shrink: 0; }
     
-    /* Контейнер для текста: занимает всё пространство под лого и центрирует контент */
-    .content-box { 
-      flex-grow: 1; 
-      display: flex;
-      flex-direction: column;
-      justify-content: center; 
-      align-items: center;
-      padding: 30px 40px; 
-      width: 100%; 
-      box-sizing: border-box; 
-    }
+    .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 25px 20px; width: 100%; box-sizing: border-box; }
     
-    h1, h2 { font-size: clamp(1.4rem, 6vw, 2.4rem); margin: 10px 0; color: #ffd700; text-transform: uppercase; }
-    p { font-size: clamp(0.85rem, 3.5vw, 1.05rem); line-height: 1.6; margin: 8px 0; }
+    h1, h2 { font-size: clamp(1.2rem, 5.5vw, 2rem); margin: 8px 0; color: #ffd700; text-transform: uppercase; letter-spacing: 1px; }
+    p { font-size: clamp(0.8rem, 3.8vw, 1rem); line-height: 1.5; margin: 8px 0; opacity: 0.9; }
     .highlight { color: #ffd700; font-weight: bold; }
     
-    .btn { text-decoration: none; color: #fff; border: 2px solid #ffd700; padding: 0.8em 2.2em; margin-top: 20px; transition: 0.3s; text-transform: uppercase; font-weight: bold; background: transparent; display: inline-block; }
-    .btn:hover { background: #ffd700; color: #000; box-shadow: 0 0 25px #ffd700; }
+    /* Кнопка с авто-анимацией сияния */
+    .btn {
+      text-decoration: none; color: #fff; border: 2px solid #ffd700;
+      padding: 12px 30px; margin-top: 15px; 
+      text-transform: uppercase; font-weight: bold;
+      background: transparent; display: inline-block;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      position: relative;
+      animation: pulse-border 2s infinite; /* Пульсирует сама */
+    }
+
+    @keyframes pulse-border {
+      0% { box-shadow: 0 0 0px rgba(255, 215, 0, 0); }
+      50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+      100% { box-shadow: 0 0 0px rgba(255, 215, 0, 0); }
+    }
+
+    /* Активное состояние при нажатии (вместо hover) */
+    .btn:active {
+      background: #ffd700;
+      color: #000;
+      transform: scale(0.95);
+    }
+
   </style>
 </head>
 <body>
-  <div class="wrapper" id="scroll-container">
+  <div class="wrapper">
     
     <section class="section">
       <div class="poster">
@@ -84,7 +127,7 @@
         <div class="content-box">
           <h2>Behind the Play</h2>
           <p>Team-focused runs & tactical extraction.</p>
-          <p>Helping the community survive the machine threat.</p>
+          <p>Helping the community survive the machines.</p>
         </div>
       </div>
     </section>
@@ -105,7 +148,7 @@
         <img src="arc_raiders_official.jpg" alt="ARC Raiders" class="arc-logo-header">
         <div class="content-box">
           <h2>Join & Win</h2>
-          <p>🎁 Weekly <span class="highlight">Rare Blueprint Giveaways</span>.</p>
+          <p>🎁 Weekly <span class="highlight">Rare Giveaways</span>.</p>
           <p>Join squad runs on TikTok and Twitch.</p>
           <a href="mailto:contact@lehlu.com" class="btn">Contact Us</a>
         </div>
@@ -115,13 +158,32 @@
   </div>
 
   <script>
-    // Активация анимации при попадании в зону видимости
+    // Intersection Observer: запуск анимации когда карточка видна на 20%
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.poster').forEach(poster => { observer.observe(poster); });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.poster').forEach(poster => {
+      observer.observe(poster);
+    });
+
+    // Оптимизированный параллакс для мобильных (отключается, если включен режим энергосбережения)
+    const wrapper = document.querySelector('.wrapper');
+    let ticking = false;
+    wrapper.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          let scrolled = wrapper.scrollTop;
+          document.body.style.backgroundPositionY = -(scrolled * 0.15) + 'px';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
   </script>
 </body>
 </html>
