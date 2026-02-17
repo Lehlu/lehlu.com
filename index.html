@@ -51,7 +51,6 @@
 
     .content-box { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 25px; }
 
-    /* ЗАГОЛОВКИ: Сделал еще больше */
     h1, h2 { 
       font-size: clamp(1.8rem, 8vw, 3.2rem); 
       margin: 15px 0; 
@@ -62,7 +61,6 @@
       line-height: 1.1;
     }
 
-    /* ОСНОВНОЙ ТЕКСТ: Теперь реально крупный */
     p { 
       font-size: clamp(1.2rem, 5vw, 1.6rem); 
       line-height: 1.5; 
@@ -73,15 +71,25 @@
     
     .highlight { color: #ffd700; font-weight: bold; }
 
-    /* КНОПКИ: Увеличил размер */
+    /* Стиль для расшифровки LEHLU */
+    .acronym-box {
+      text-align: left;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .acronym-line {
+      font-size: clamp(1.2rem, 5.5vw, 1.8rem);
+      margin: 10px 0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
     .btn {
       text-decoration: none; color: #ffd700; border: 3px solid #ffd700;
       padding: 16px 45px; margin-top: 30px; font-weight: bold;
       text-transform: uppercase; background: rgba(0,0,0,0.5);
       animation: glow-pulse 2s infinite ease-in-out;
-      cursor: pointer;
-      font-size: 1.3rem;
-      letter-spacing: 2px;
+      cursor: pointer; font-size: 1.3rem; letter-spacing: 2px;
     }
 
     @keyframes glow-pulse {
@@ -147,6 +155,23 @@
           <h2>Manifesto</h2>
           <p>Silent teamwork & cooperative survival.</p>
           <p>Tactical <span class="highlight">AR</span> immersion.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="poster">
+        <div class="scan-glow"></div>
+        <img src="arc_raiders_official.jpg" alt="ARC" class="arc-logo-header">
+        <div class="content-box">
+          <h2>Definition</h2>
+          <div class="acronym-box">
+            <div class="acronym-line"><span class="highlight">L</span>OYAL</div>
+            <div class="acronym-line"><span class="highlight">E</span>XTRACTION</div>
+            <div class="acronym-line"><span class="highlight">H</span>IDDEN</div>
+            <div class="acronym-line"><span class="highlight">L</span>ETHAL</div>
+            <div class="acronym-line"><span class="highlight">U</span>NIT</div>
+          </div>
         </div>
       </div>
     </section>
